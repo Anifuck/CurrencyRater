@@ -24,11 +24,11 @@ namespace CurrencyRater.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var response = _currencyRateGetter.GetValutesAsync();
+            var response = await  _currencyRateGetter.GetValutesAsync();
             List<ValuteInfo> valutesList = new List<ValuteInfo>();
             foreach (string valute in valutes)
             {
-                var v = _currencyRateGetter.GetValute(response.Result, valute);
+                var v = _currencyRateGetter.GetValute(response, valute);
                 valutesList.Add(new ValuteInfo(v.Name, v.Nominal, v.Value));
             }
             return View("Index",valutesList);
