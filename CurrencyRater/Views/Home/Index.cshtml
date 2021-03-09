@@ -1,0 +1,10 @@
+﻿@model List<CurrencyRater.Models.DomainModels.ValuteInfo>
+
+
+<div class="text-center">
+    Валютный курс<br>
+    @foreach (var valute in Model)
+    {
+        <p>@valute.Name = @valute.Value Российских рублей</p>
+    }
+</div>
