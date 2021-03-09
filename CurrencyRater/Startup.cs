@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CurrencyRate.Providers.HttpProvider;
 using CurrencyRater.Providers.HttpProvider;
+using CurrencyRater.Services;
 using CurrencyRater.Services.CurrencyRateService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,7 @@ namespace CurrencyRater
             services.AddControllersWithViews();
             services.AddTransient<IHttpProvider, HttpProvider>();
             services.AddTransient<ICurrencyRateGetter, CurrencyRateGetter>();
+            services.AddTransient<IHomeService, HomeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

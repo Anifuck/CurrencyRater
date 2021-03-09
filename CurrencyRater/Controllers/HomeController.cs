@@ -10,28 +10,22 @@ using CurrencyRater.Services.CurrencyRateService;
 using CurrencyRate.Providers.HttpProvider;
 using CurrencyRater.Models.DomainModels;
 using CurrencyRater.Enums;
+using CurrencyRater.Services;
 
 namespace CurrencyRater.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ICurrencyRateGetter _currencyRateGetter;
-        string[] valutes = new string[] {"USD","EUR","UAH"};
+        private readonly IHomeService _homeService;
 
-        public HomeController(ICurrencyRateGetter currencyRateGetter)
+        public HomeController(IHomeService homeService)
         {
-            _currencyRateGetter = currencyRateGetter;
+            _homeService = homeService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var response = await  _currencyRateGetter.GetValutesAsync();
-            List<ValuteInfo> valutesList = new List<ValuteInfo>();
-            foreach (Valute valute in Enum.GetValues(typeof(Valute)))
-            {
-                var v = _currencyRateGetter.GetValute(response, valute);
-                valutesList.Add(new ValuteInfo(v.Name, v.Nominal, v.Value));
-            }
+            var valutesList = await _homeService.GetActualRateAsync();
             return View(valutesList);
         }
     }
