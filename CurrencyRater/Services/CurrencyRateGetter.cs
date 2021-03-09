@@ -29,7 +29,11 @@ namespace CurrencyRater.Services.CurrencyRateService
         public ExchangeRateInfo GetValute(ExchangeRateResponseData exchangeRateResponseData, Valute key)
         {
             var valuteKey = key.ToString("G");
-            return exchangeRateResponseData.Valute[valuteKey];
+            if (exchangeRateResponseData.Valute.ContainsKey(valuteKey))
+                return exchangeRateResponseData.Valute[valuteKey];
+            else
+                return new ExchangeRateInfo();
+        //TODO писать в лог
         }
         
     }
