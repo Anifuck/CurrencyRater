@@ -1,4 +1,5 @@
-﻿using CurrencyRater.Models;
+﻿using CurrencyRater.Enums;
+using CurrencyRater.Models;
 using CurrencyRater.Providers.HttpProvider;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -25,9 +26,10 @@ namespace CurrencyRater.Services.CurrencyRateService
             return exchangeRateResponseData;
         }
 
-        public ExchangeRateInfo GetValute(ExchangeRateResponseData exchangeRateResponseData, string key)
+        public ExchangeRateInfo GetValute(ExchangeRateResponseData exchangeRateResponseData, Valute key)
         {
-            return exchangeRateResponseData.Valute[key];
+            var valuteKey = key.ToString("G");
+            return exchangeRateResponseData.Valute[valuteKey];
         }
         
     }

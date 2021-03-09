@@ -9,6 +9,7 @@ using CurrencyRater.Models;
 using CurrencyRater.Services.CurrencyRateService;
 using CurrencyRate.Providers.HttpProvider;
 using CurrencyRater.Models.DomainModels;
+using CurrencyRater.Enums;
 
 namespace CurrencyRater.Controllers
 {
@@ -26,12 +27,12 @@ namespace CurrencyRater.Controllers
         {
             var response = await  _currencyRateGetter.GetValutesAsync();
             List<ValuteInfo> valutesList = new List<ValuteInfo>();
-            foreach (string valute in valutes)
+            foreach (Valute valute in Enum.GetValues(typeof(Valute)))
             {
                 var v = _currencyRateGetter.GetValute(response, valute);
                 valutesList.Add(new ValuteInfo(v.Name, v.Nominal, v.Value));
             }
-            return View("Index",valutesList);
+            return View(valutesList);
         }
     }
 }

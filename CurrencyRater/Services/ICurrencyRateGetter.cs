@@ -1,4 +1,5 @@
-﻿using CurrencyRater.Models;
+﻿using CurrencyRater.Enums;
+using CurrencyRater.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace CurrencyRater.Services.CurrencyRateService
     public interface ICurrencyRateGetter
     {
         public Task<ExchangeRateResponseData> GetValutesAsync();
-        public ExchangeRateInfo GetValute(ExchangeRateResponseData exchangeRateResponseData, string key);
+        public ExchangeRateInfo GetValute(ExchangeRateResponseData exchangeRateResponseData, Valute key);
     }
 }
